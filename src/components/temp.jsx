@@ -1,71 +1,70 @@
 
-const [cookie,setCookie]=useCookie(false)
-
-export default function setCookieButton(){
+export default function SetCookieButton(){
     return (
         <div className="cookie-button">
-            <input type="button" value="쿠키 허용" onClick={enableCookies}/>
-            <input type="button" value="쿠키 차단" onClick={disableCookies}/>
+            <button>쿠키 허용</button>
+            <button>쿠키 차단</button>
         </div>
     )
 }
 
-export default function loginForm(){
+export default function LoginForm(){
     return (
         <div>
             <div className="login-form">
-                <form value="로그인">
-                    <label for="id">아이디</label>
+                <form>
+                    <label htmlFor="id">아이디</label>
                     <input type="text" name="id" required/>
 
-                    <label for="pw">비밀번호</label>
+                    <label htmlFor="pw">비밀번호</label>
                     <input type="password" name="pw" required/>
 
-                    <button value="로그인" onClick={login}/>   
+                    <button>로그인</button>
                 </form>
             </div>
-            <div className="signup-link">
-                <input type="button" value="회원가입" onClick={goToSignUp}/>
+            <div className="link">
+                <Link to="/register">회원가입</Link>
+                <Link to="/register">아이디찾기</Link>
+                <Link to="/register">비밀번호찾기</Link>
             </div>
                        
         </div>
     )
 }
 
-export default function registerForm(){
+export default function RegisterForm(){
     return (
         <div>
-            <div className="login-form">
-                <form value="로그인">
-                    <label for="id">아이디</label>
+            <div className="register-form">
+                <form>
+                    <label htmlFor="id">아이디</label>
                     <input type="text" name="id" required/>
 
-                    <label for="pw">비밀번호</label>
+                    <label htmlFor="pw">비밀번호</label>
                     <input type="password" name="pw" required/>
 
-                    <button value="로그인" onClick={login}/>   
+                    <button>회원가입</button> 
                 </form>
-            </div>
-            <div className="signup-link">
-                <input type="button" value="회원가입" onClick={goToSignUp}/>
-            </div>
-                       
+            </div> 
         </div>
     )
 }
 
-export default function logo(){
+export default function Logo(){
     return (
-        <img src=""/>
+        <img src="./data/logo.jpg"/>
     )
 }
 
-export default function searchForm(){
+export default function SearchForm(){
     return (
         <div>
+            <div className="profile-button">
+                <a href="/users/:user_id"><img src="./data/default_profile.png"/></a>
+            </div>
             <div className="search-input">
                 <input type="text" required/>
-                <button value="검색" onClick={search}/>   
+                <button value="검색" />  //navigate로 바꿔 
             </div>
             <div className="detail-search-toggle">
                 <select></select>
@@ -74,7 +73,7 @@ export default function searchForm(){
     )
 }
 
-export default function boardList(){
+export default function BoardList(){
     return (
         <div>
             <div className="tag-toggle">
@@ -102,7 +101,7 @@ export default function boardList(){
     )
 }
 
-export default function footer(){
+export default function Footer(){
     return (
         <p>made by</p>
     )
@@ -162,11 +161,11 @@ export default function Profile(){
     )
 }
 
-export default function error(){
+export default function Error(){
     return (
         <div className="error-text">
             <h1>404 Not Found</h1>
-            <p></p>
+            <p>설명</p>
         </div>       
     )
 }

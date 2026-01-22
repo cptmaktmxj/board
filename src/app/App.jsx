@@ -1,31 +1,26 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import RootLayout from "../layout/RootLayout.jsx";
+import BoardLayout from "../layout/BoardLayout.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import BoardListPage from "./pages/Board/BoardListPage.jsx";
-import BoardWritePage from "./pages/Board/BoardWritePage.jsx";
-import ProfilePage from "./pages/Profile/ProfilePage.jsx";
 import NotFoundPage from "./pages/NotFound/NotFoundPage.jsx";
 
 export default function App() {
   return (
     <Routes>
-      {/* 레이아웃(헤더/푸터) 포함 */}
-      <Route element={<RootLayout />}>
-        <Route path="/" element={<Navigate to="/boards/free" replace />} />
-
+      
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
-        {/* 게시판 5종류면 :board로 처리 가능 */}
-        <Route path="/boards/:board" element={<BoardListPage />} />
-        <Route path="/posts/:id" element={<BoardDetailPage />} />
-        <Route path="/write" element={<BoardWritePage />} />
+        <Route element={<BoardLayout />}>
+            <Route path="/boards/:board_id" element={<BoardListPage />} />
+        </Route>
+        
+        <Route path="*" element={<NotFoundPage />} />
 
-        <Route path="/profile" element={<ProfilePage />} />
-      </Route>
-
-      <Route path="*" element={<NotFoundPage />} />
     </Routes>
-  );
+
+  )
 }
