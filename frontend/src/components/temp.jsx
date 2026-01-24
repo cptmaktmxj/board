@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 
-export default function SetCookieButton(){
+
+export function SetCookieButton(){
     return (
         <div className="cookie-button">
             <button>쿠키 허용</button>
@@ -8,7 +10,7 @@ export default function SetCookieButton(){
     )
 }
 
-export default function LoginForm(){
+export function LoginForm(){
     return (
         <div>
             <div className="login-form">
@@ -32,7 +34,7 @@ export default function LoginForm(){
     )
 }
 
-export default function RegisterForm(){
+export function RegisterForm(){
     return (
         <div>
             <div className="register-form">
@@ -50,13 +52,13 @@ export default function RegisterForm(){
     )
 }
 
-export default function Logo(){
+export function Logo(){
     return (
         <img src="./data/logo.jpg"/>
     )
 }
 
-export default function SearchForm(){
+export function SearchForm(){
     return (
         <div>
             <div className="profile-button">
@@ -64,7 +66,7 @@ export default function SearchForm(){
             </div>
             <div className="search-input">
                 <input type="text" required/>
-                <button value="검색" />  //navigate로 바꿔 
+                <button>검색</button>
             </div>
             <div className="detail-search-toggle">
                 <select></select>
@@ -73,7 +75,7 @@ export default function SearchForm(){
     )
 }
 
-export default function BoardList(){
+export function BoardList(){
     return (
         <div>
             <div className="tag-toggle">
@@ -85,8 +87,8 @@ export default function BoardList(){
             </div>
 
             <div className="post-view-toggle">
-                <div className="post-size"></div>
-                <div className="post-page"></div>
+                <div className="posts-count"></div>
+                <div className="posts-page"></div>
             </div>
 
             <div className="main-board">
@@ -101,13 +103,13 @@ export default function BoardList(){
     )
 }
 
-export default function Footer(){
+export function Footer(){
     return (
         <p>made by</p>
     )
 }
 
-export default function WriteAndEditPost(){
+export function WriteAndEditPost(){
     return (
         <div>
             <div className="post-contents">
@@ -138,7 +140,7 @@ export default function WriteAndEditPost(){
     )
 }
 
-export default function Profile(){
+export function Profile(){
     return (
         <div>
             <div className="profile-pic">
@@ -161,7 +163,7 @@ export default function Profile(){
     )
 }
 
-export default function Error(){
+export function Error(){
     return (
         <div className="error-text">
             <h1>404 Not Found</h1>

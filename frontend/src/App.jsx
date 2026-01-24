@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import BoardLayout from "../layout/BoardLayout.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import RegisterPage from "./pages/RegisterPage.jsx";
+import BoardLayout from "./layout/BoardLayout.jsx";
+import LoginPage from "./pages/auth/LoginPage.jsx";
+import RegisterPage from "./pages/auth/RegisterPage.jsx";
 import BoardListPage from "./pages/Board/BoardListPage.jsx";
-import NotFoundPage from "./pages/NotFound/NotFoundPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 export default function App() {
   return (
@@ -15,7 +15,7 @@ export default function App() {
         <Route path="/register" element={<RegisterPage />} />
 
         <Route element={<BoardLayout />}>
-            <Route path="/boards/:board_id" element={<BoardListPage />} />
+            <Route path="/boards" element={<BoardListPage />} />
         </Route>
         
         <Route path="*" element={<NotFoundPage />} />

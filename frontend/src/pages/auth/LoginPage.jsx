@@ -1,5 +1,4 @@
-import SetCookieButton from "../../components/temp.jsx";
-import Temp from "../../components/temp.jsx";
+import {SetCookieButton,LoginForm} from "../../components/temp.jsx";
 
 export default function LoginPage(){
     const [cookie,setCookie]=useState(false)
