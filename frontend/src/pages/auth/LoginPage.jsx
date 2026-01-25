@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import {SetCookieButton,LoginForm} from "../../components/temp.jsx";
 
 export default function LoginPage(){
@@ -6,6 +7,7 @@ export default function LoginPage(){
     const [cookie,setCookie]=useState(false)
 
     function handleLogin(){
+        //근데 무조건 navigate 되는것도 이상한데
         navigate("/boards")
     }
 
@@ -16,7 +18,7 @@ export default function LoginPage(){
 
     return (
         <div>
-            <LoginForm login={handleLogin}/>
+            <LoginForm onSubmit={handleLogin}/>
             <SetCookieButton allowCookie={handleCookie} blockCookie={handleCookie}/>
         </div>
     )

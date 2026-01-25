@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-export function SetCookieButton(){
+export function SetCookieButton({allowCookie,blockCookie}){
     return (
         <div className="cookie-button">
             <button onClick={allowCookie}>쿠키 허용</button>
@@ -10,11 +10,11 @@ export function SetCookieButton(){
     )
 }
 
-export function LoginForm(){
+export function LoginForm({onSubmit}){
     return (
         <div>
             <div className="login-form">
-                <form onSubmit={login}>
+                <form onSubmit={onSubmit}>
                     <label htmlFor="id">아이디</label>
                     <input type="text" name="id" required/>
 
@@ -34,11 +34,11 @@ export function LoginForm(){
     )
 }
 
-export function RegisterForm(){
+export function RegisterForm({onSubmit}){
     return (
         <div>
             <div className="register-form">
-                <form>
+                <form onSubmit={onSubmit}>
                     <label htmlFor="id">아이디</label>
                     <input type="text" name="id" required/>
 
@@ -58,7 +58,7 @@ export function Logo(){
     )
 }
 
-export function SearchForm(){
+export function SearchForm({search}){
     return (
         <div>
             <div className="profile-button">

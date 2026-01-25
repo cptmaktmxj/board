@@ -9,6 +9,6 @@ export default function RegisterPage(){
     }
 
     return (
-        <RegisterForm register={handleRegister}/>
+        <RegisterForm onSubmit={handleRegister}/>
     )
 }
