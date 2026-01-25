@@ -66,10 +66,15 @@ export function SearchForm(){
             </div>
             <div className="search-input">
                 <input type="text" required/>
-                <button>검색</button>
+                <button onClick={search}>검색</button>
             </div>
-            <div className="detail-search-toggle">
-                <select></select>
+            <div className="detail-search-select">
+                <select>
+                    <option value="제목+내용"></option>
+                    <option value="제목"></option>
+                    <option value="내용"></option>
+                    <option value="글쓴이"></option>
+                </select>
             </div>    
         </div>
     )
@@ -78,25 +83,33 @@ export function SearchForm(){
 export function BoardList(){
     return (
         <div>
-            <div className="tag-toggle">
+            <div className="tag-select">
                 <select></select>
             </div>
 
             <div className="write-button">
-
+                <Link to="/boards/:board_id/write">글 작성</Link> //임의 링크명
             </div>
 
-            <div className="post-view-toggle">
+            <div className="post-view-select">
                 <div className="posts-count"></div>
                 <div className="posts-page"></div>
             </div>
 
             <div className="main-board">
-                <div className="board-toggle">
-
+                <div className="board-select">
+                    <select>
+                        <option value="족보사물함"></option>
+                        <option value="질문게시판"></option>
+                        <option value="정보게시판"></option>
+                        <option value="자유게시판"></option>
+                        <option value="공지게시판"></option>
+                    </select>
                 </div>
                 <div className="board-list">
+                    <ul>
 
+                    </ul>
                 </div>    
             </div>            
         </div>
@@ -105,7 +118,7 @@ export function BoardList(){
 
 export function Footer(){
     return (
-        <p>made by</p>
+        <p>made by ...</p>
     )
 }
 
