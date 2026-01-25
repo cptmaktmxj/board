@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-
+import logo from "../data/logo.jpg";
+import defaultProfileImage from "../data/default_profile.png";
 
 export function SetCookieButton({allowCookie,blockCookie}){
     return (
@@ -39,9 +40,16 @@ export function RegisterForm({onSubmit}){
         <div>
             <div className="register-form">
                 <form onSubmit={onSubmit}>
+                    <label htmlFor="id">이름</label>
+                    <input type="text" name="name" required/>
+                    <label htmlFor="id">학번</label>
+                    <input type="text" name="studentId" required/>
+                    <label htmlFor="id">학년</label>
+                    <input type="text" name="grade" required/>
+                    <label htmlFor="id">동아리</label>
+                    <input type="text" name="club" required/>
                     <label htmlFor="id">아이디</label>
                     <input type="text" name="id" required/>
-
                     <label htmlFor="pw">비밀번호</label>
                     <input type="password" name="pw" required/>
 
@@ -54,7 +62,7 @@ export function RegisterForm({onSubmit}){
 
 export function Logo(){
     return (
-        <img src="./data/logo.jpg"/>
+        <img src={logo} alt="logo"/>
     )
 }
 
@@ -62,7 +70,7 @@ export function SearchForm({search}){
     return (
         <div>
             <div className="profile-button">
-                <a href="/users/:user_id"><img src="./data/default_profile.png"/></a>
+                <a href="/users/:user_id"><img src={defaultProfileImage}/></a>
             </div>
             <div className="search-input">
                 <input type="text" required/>
@@ -88,7 +96,7 @@ export function BoardList(){
             </div>
 
             <div className="write-button">
-                <Link to="/boards/:board_id/write">글 작성</Link> //임의 링크명
+                <Link to="/boards/:board_id/write">글 작성</Link>
             </div>
 
             <div className="post-view-select">
