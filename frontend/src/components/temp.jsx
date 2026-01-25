@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 export function SetCookieButton(){
     return (
         <div className="cookie-button">
-            <button>쿠키 허용</button>
-            <button>쿠키 차단</button>
+            <button onClick={allowCookie}>쿠키 허용</button>
+            <button onClick={blockCookie}>쿠키 차단</button>
         </div>
     )
 }
@@ -14,7 +14,7 @@ export function LoginForm(){
     return (
         <div>
             <div className="login-form">
-                <form>
+                <form onSubmit={login}>
                     <label htmlFor="id">아이디</label>
                     <input type="text" name="id" required/>
 
