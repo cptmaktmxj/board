@@ -1,10 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import {RegisterForm} from "../../components/temp.jsx";
 
 export default function RegisterPage(){
+    const navigate=useNavigate()
+
     function handleRegister(){
-        //navigate
+        navigate("/login")
     }
-    
+
     return (
         <RegisterForm register={handleRegister}/>
     )
