@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import React from 'react';
 import BoardLayout from "./layout/BoardLayout.jsx";
 import LoginPage from "./pages/auth/LoginPage.jsx";
 import RegisterPage from "./pages/auth/RegisterPage.jsx";
