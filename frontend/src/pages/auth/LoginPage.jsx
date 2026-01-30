@@ -12,7 +12,7 @@ export default function LoginPage(){
     }
 
     function handleCookie(){
-        cookie===true ? navigate("/boards") : navigate("/login")
+        cookie===true && navigate("/boards")
         /*버튼 클릭하면 쿠키 상태 설정하고 쿠키 상태에 따라 navigate*/
         /*또는 버튼 자체에 링크 이동을 걸어놓고 상태 토글+서버에 정보 보내기만 이벤트로 추가*/
     }

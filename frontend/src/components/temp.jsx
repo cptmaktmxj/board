@@ -112,13 +112,13 @@ export function BoardList(){
                         <option value="정보게시판"></option>
                         <option value="자유게시판"></option>
                         <option value="공지게시판"></option>
+                        <div className="board-list">
+                            <ul>
+
+                            </ul>
+                        </div> 
                     </select>
                 </div>
-                <div className="board-list">
-                    <ul>
-
-                    </ul>
-                </div>    
             </div>            
         </div>
     )
