@@ -2,6 +2,19 @@ import { Link } from "react-router-dom";
 import logo from "../data/logo.jpg";
 import defaultProfileImage from "../data/default_profile.png";
 
+const boards=[
+    { id: 1, name: "족보사물함" },
+    { id: 2, name: "자유게시판" },
+    { id: 3, name: "질문게시판" },
+    { id: 4, name: "정보게시판" },
+    { id: 5, name: "공지게시판" }
+]
+
+const tagIteration=(grade,period)=>{
+    const tags=[]
+    tags.map(tag => <p>{grade}"학년" {period}"학기"</p>)
+}
+
 export function SetCookieButton({allowCookie,blockCookie}){
     return (
         <div className="cookie-button">
