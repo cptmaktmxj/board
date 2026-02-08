@@ -20,7 +20,6 @@ export default function RegisterPage() {
         fields={fields}
         submitLabel="가입하기"
         onSubmit={() => navigate("/login")}
-        footerLinks={[{ to: "/login", label: "로그인으로 돌아가기" }]}
       />
     </div>
   );

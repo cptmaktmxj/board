@@ -10,7 +10,6 @@ function includesByType(post, keyword, searchType) {
   if (searchType === "title") return post.title.toLowerCase().includes(normalized);
   if (searchType === "content") return post.content.toLowerCase().includes(normalized);
   if (searchType === "author") return post.author.toLowerCase().includes(normalized);
-
   return `${post.title} ${post.content}`.toLowerCase().includes(normalized);
 }
 
@@ -25,22 +24,43 @@ export default function BoardListPage() {
 
   const [searchType, setSearchType] = useState(initialType);
   const [searchKeyword, setSearchKeyword] = useState(initialKeyword);
+  const [perPage, setPerPage] = useState(10);
+  const [pageChunk, setPageChunk] = useState(50);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setSearchType(initialType);
     setSearchKeyword(initialKeyword);
-  }, [initialKeyword, initialType]);
+    setCurrentPage(1);
+  }, [initialKeyword, initialType, boardId, location.pathname]);
 
   const isSearchMode = location.pathname.endsWith("/search");
+  const currentBoard = boards.find((board) => board.id === boardId) || boards[0];
 
-  const visiblePosts = useMemo(() => {
+  const filteredPosts = useMemo(() => {
     const boardFiltered = posts.filter((post) => post.boardId === boardId);
     if (!isSearchMode) return boardFiltered;
-
     return boardFiltered.filter((post) => includesByType(post, initialKeyword, initialType));
   }, [boardId, initialKeyword, initialType, isSearchMode]);
 
-  const currentBoard = boards.find((board) => board.id === boardId) || boards[0];
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / perPage));
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
+
+  const paginatedPosts = useMemo(() => {
+    const start = (currentPage - 1) * perPage;
+    return filteredPosts.slice(start, start + perPage);
+  }, [currentPage, filteredPosts, perPage]);
+
+  const pageNumbers = useMemo(() => {
+    const chunkStart = Math.floor((currentPage - 1) / pageChunk) * pageChunk + 1;
+    const chunkEnd = Math.min(chunkStart + pageChunk - 1, totalPages);
+    return Array.from({ length: chunkEnd - chunkStart + 1 }, (_, idx) => chunkStart + idx);
+  }, [currentPage, pageChunk, totalPages]);
 
   const handleBoardChange = (nextBoardId) => {
     if (isSearchMode) {
@@ -71,10 +91,25 @@ export default function BoardListPage() {
         onSearchSubmit={handleSearch}
       />
       <PostList
-        posts={visiblePosts}
+        posts={paginatedPosts}
         boardName={currentBoard.name}
+        boardId={currentBoard.id}
         isSearch={isSearchMode}
         searchKeyword={initialKeyword}
+        perPage={perPage}
+        onPerPageChange={(value) => {
+          setPerPage(value);
+          setCurrentPage(1);
+        }}
+        pageChunk={pageChunk}
+        onPageChunkChange={(value) => {
+          setPageChunk(value);
+          setCurrentPage(1);
+        }}
+        currentPage={currentPage}
+        pageNumbers={pageNumbers}
+        onPageChange={setCurrentPage}
+        totalPages={totalPages}
       />
     </>
   );

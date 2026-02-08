@@ -4,7 +4,9 @@ import { Footer } from "../components/temp.jsx";
 export default function BoardLayout() {
   return (
     <div className="app">
-      <Outlet />
+      <main className="main-content">
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );

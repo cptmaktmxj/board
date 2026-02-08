@@ -9,7 +9,8 @@ export default function BoardWritePage() {
   const [searchType, setSearchType] = useState("title+content");
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  const post = posts.find((item) => item.id === postId && item.boardId === boardId);
+  const isEdit = Boolean(postId);
+  const post = isEdit ? posts.find((item) => item.id === postId && item.boardId === boardId) : null;
   const currentBoard = boards.find((board) => board.id === boardId) || boards[0];
 
   return (
@@ -30,8 +31,13 @@ export default function BoardWritePage() {
       />
       <PostEditor
         post={post}
+        isEdit={isEdit}
         onSubmit={() => {
-          navigate(`/boards/${boardId}/posts/${postId}`);
+          if (isEdit) {
+            navigate(`/boards/${boardId}/posts/${postId}`);
+            return;
+          }
+          navigate(`/boards/${boardId}`);
         }}
       />
     </>

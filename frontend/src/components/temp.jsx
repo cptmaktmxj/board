@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import logo from "../data/logo.jpg";
+import logo from "../data/logo.png";
 import defaultProfileImage from "../data/default_profile.png";
 
 export function AuthForm({ title, fields, submitLabel, onSubmit, footerLinks }) {
   return (
     <section className="auth-card">
-      <img src={logo} alt="Board logo" className="auth-logo" />
+      <Link to="/boards/notice" className="logo-link" aria-label="메인으로 이동">
+        <img src={logo} alt="Board logo" className="auth-logo" />
+      </Link>
       <h1>{title}</h1>
       <form
         onSubmit={(event) => {
@@ -44,7 +46,9 @@ export function TopBar({
 }) {
   return (
     <header className="top-bar">
-      <img src={logo} alt="Board logo" className="top-logo" />
+      <Link to="/boards/notice" className="logo-link" aria-label="메인으로 이동">
+        <img src={logo} alt="Board logo" className="top-logo" />
+      </Link>
       <div className="search-wrap">
         <select value={searchType} onChange={(e) => onSearchTypeChange(e.target.value)}>
           <option value="title+content">제목+내용</option>
@@ -62,7 +66,6 @@ export function TopBar({
         </button>
       </div>
       <div className="board-switch">
-        <span>게시판</span>
         <select value={currentBoardId} onChange={(e) => onBoardChange(e.target.value)}>
           {boards.map((board) => (
             <option key={board.id} value={board.id}>
@@ -78,12 +81,33 @@ export function TopBar({
   );
 }
 
-export function PostList({ posts, boardName, isSearch, searchKeyword }) {
+export function PostList({
+  posts,
+  boardName,
+  boardId,
+  isSearch,
+  searchKeyword,
+  perPage,
+  onPerPageChange,
+  pageChunk,
+  onPageChunkChange,
+  currentPage,
+  pageNumbers,
+  onPageChange,
+  totalPages,
+}) {
   return (
     <section className="page-card">
       <div className="list-head">
         <h2>{isSearch ? `검색 결과: ${searchKeyword || "전체"}` : boardName}</h2>
       </div>
+
+      <div className="list-toolbar">
+        <Link to={`/boards/${boardId}/posts/new`} className="write-link">
+          <button type="button">게시글 작성</button>
+        </Link>
+      </div>
+
       {posts.length === 0 ? (
         <p className="empty">조건에 맞는 게시글이 없습니다.</p>
       ) : (
@@ -101,6 +125,23 @@ export function PostList({ posts, boardName, isSearch, searchKeyword }) {
           ))}
         </ul>
       )}
+
+      <div className="list-options">
+        
+      </div>
+
+      <div className="pagination">
+        {pageNumbers.map((page) => (
+          <button
+            key={page}
+            type="button"
+            className={page === currentPage ? "active" : ""}
+            onClick={() => onPageChange(page)}
+          >
+            {page}
+          </button>
+        ))}
+      </div>
     </section>
   );
 }
@@ -126,14 +167,13 @@ export function PostDetail({ post }) {
   );
 }
 
-export function PostEditor({ post, onSubmit }) {
-  if (!post) {
-    return <p className="empty">수정할 게시글이 없습니다.</p>;
+export function PostEditor({ post, isEdit, onSubmit }) {
+  if (isEdit && !post) {
+    return <p className="empty">수정할 게시글을 찾을 수 없습니다.</p>;
   }
 
   return (
     <section className="page-card">
-      <h2>게시글 편집</h2>
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -143,13 +183,13 @@ export function PostEditor({ post, onSubmit }) {
       >
         <label className="form-row">
           <span>제목</span>
-          <input name="title" defaultValue={post.title} required />
+          <input name="title" defaultValue={post?.title || ""} required />
         </label>
         <label className="form-row">
           <span>내용</span>
-          <textarea name="content" rows={10} defaultValue={post.content} required />
+          <textarea name="content" rows={10} defaultValue={post?.content || ""} required />
         </label>
-        <button type="submit">저장</button>
+        <button type="submit">{isEdit ? "수정 저장" : "작성 완료"}</button>
       </form>
     </section>
   );
@@ -185,7 +225,7 @@ export function ProfileCard({ user }) {
 }
 
 export function Footer() {
-  return <footer className="footer">board frontend prototype</footer>;
+  return <footer className="footer">made by 000</footer>;
 }
 
 export function ErrorPage() {

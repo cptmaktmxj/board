@@ -18,6 +18,7 @@ export default function App() {
       <Route element={<BoardLayout />}>
         <Route path="/boards/:boardId" element={<BoardListPage />} />
         <Route path="/boards/:boardId/search" element={<BoardListPage />} />
+        <Route path="/boards/:boardId/posts/new" element={<BoardWritePage />} />
         <Route path="/boards/:boardId/posts/:postId" element={<PostDetailPage />} />
         <Route path="/boards/:boardId/posts/:postId/edit" element={<BoardWritePage />} />
         <Route path="/profile" element={<ProfilePage />} />

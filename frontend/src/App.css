@@ -1,3 +1,10 @@
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +12,7 @@
 }
 
 body {
-  background: linear-gradient(170deg, #f1f4ff 0%, #f7fff6 50%, #fff7ea 100%);
+  background: #ffffffee;
   color: #18212f;
   font-family: "Segoe UI", "Noto Sans KR", sans-serif;
 }
@@ -13,6 +20,10 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.logo-link {
+  display: inline-flex;
 }
 
 button,
@@ -23,9 +34,15 @@ textarea {
 }
 
 .app {
-  max-width: 1080px;
-  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
 }
 
 .auth-page {
@@ -43,8 +60,8 @@ textarea {
 }
 
 .auth-logo {
-  width: 72px;
-  height: 72px;
+  width: 84px;
+  height: 84px;
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 10px;
@@ -63,20 +80,27 @@ textarea {
 
 .form-row input,
 .form-row textarea,
-.search-wrap input,
-.search-wrap select,
-.board-switch select {
+.search-wrap input {
   border: 1px solid #c7d0df;
   border-radius: 10px;
   padding: 10px 12px;
   background: #fff;
 }
 
+.search-wrap select,
+.board-switch select,
+.list-options select {
+  border: 1px solid #c7d0df;
+  border-radius: 0;
+  padding: 10px 12px;
+  background: #fff;
+}
+
 button {
   border: none;
-  border-radius: 10px;
+  border-radius: 0;
   padding: 10px 14px;
-  background: #12736a;
+  background: #0E4A84;
   color: #fff;
   cursor: pointer;
 }
@@ -87,6 +111,20 @@ button {
   gap: 10px;
   color: #2f4f8f;
   font-size: 14px;
+}
+
+.cookie-prompt {
+  margin-top: 12px;
+  width: min(420px, 100%);
+  border: 1px solid #c7d0df;
+  background: #ffffffee;
+  padding: 12px;
+}
+
+.cookie-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
 }
 
 .top-bar {
@@ -102,8 +140,8 @@ button {
 }
 
 .top-logo {
-  width: 54px;
-  height: 54px;
+  width: 64px;
+  height: 64px;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -141,10 +179,17 @@ button {
   margin-bottom: 12px;
 }
 
+.list-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
 .post-list {
   list-style: none;
   display: grid;
   gap: 10px;
+  margin-bottom: 14px;
 }
 
 .post-item {
@@ -206,10 +251,35 @@ button {
   padding: 8px 0;
 }
 
+.list-options {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.list-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pagination button.active {
+  background: #123763;
+}
+
 .footer {
   text-align: center;
   color: #4f5e78;
-  margin-top: 12px;
+  margin-top: auto;
+  padding-top: 12px;
   padding: 8px;
 }
 
