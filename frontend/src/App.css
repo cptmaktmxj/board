@@ -1,102 +1,232 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* 크기 계산을 직관적으로 */
+  box-sizing: border-box;
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #f5f5f5;
-  color: #222;               
+  background: linear-gradient(170deg, #f1f4ff 0%, #f7fff6 50%, #fff7ea 100%);
+  color: #18212f;
+  font-family: "Segoe UI", "Noto Sans KR", sans-serif;
 }
 
-/*공통 레이아웃*/
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-/* 앱 최상위 컨테이너 */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 .app {
-  max-width: 1200px; 
-  margin: 0 auto;  
-  padding: 16px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* 페이지 공통 영역 */
-.page {
-  background-color: #fff;
-  padding: 16px;
-  border-radius: 8px;
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.auth-card {
+  width: min(420px, 100%);
+  background: #ffffffee;
+  border: 1px solid #d6dfef;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.auth-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.auth-card h1 {
+  margin-bottom: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.form-row input,
+.form-row textarea,
+.search-wrap input,
+.search-wrap select,
+.board-switch select {
+  border: 1px solid #c7d0df;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fff;
 }
 
 button {
-  padding: 8px 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #12736a;
+  color: #fff;
   cursor: pointer;
-  background-color: #0E4A84;
-  color: white;
 }
 
-button:hover {
-  opacity: 0.9;
+.inline-links {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  color: #2f4f8f;
+  font-size: 14px;
 }
 
-.input,
-select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
+.top-bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  background: #ffffffdd;
+  border: 1px solid #d6dfef;
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 14px;
 }
 
-/* 검색바 */
-.searchBar {
+.top-logo {
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.search-wrap {
   display: flex;
   gap: 8px;
-  margin-bottom: 16px;
 }
 
-.list {
+.search-wrap input {
+  flex: 1;
+}
+
+.board-switch {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  gap: 6px;
 }
 
-/* 게시글 카드 */
-.listItem {
+.profile-link img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #d1d9e8;
+}
+
+.page-card {
+  background: #ffffffdd;
+  border: 1px solid #d6dfef;
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.list-head {
+  margin-bottom: 12px;
+}
+
+.post-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.post-item {
+  display: block;
+  border: 1px solid #dde4f0;
+  border-radius: 12px;
   padding: 14px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
-.listItem:hover {
-  background-color: #f5f5f5;
+.post-item .title {
+  font-weight: 700;
 }
 
-/* 말머리 and 태그 */
-.tag {
-  display: inline-block;
-  font-size: 12px;
-  padding: 2px 6px;
-  border-radius: 6px;
-  background-color: #eef2ff;
-  color: #3730a3;
-  margin-right: 6px;
+.meta {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #4f5e78;
 }
 
-/* 게시글 제목 */
-.itemTitle {
-  font-weight: bold;
-  margin-bottom: 4px;
+.tags {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #1d6d89;
 }
 
-/*게시글 상세*/
-.postHeader {
-  margin-bottom: 16px;
+.content {
+  margin-top: 14px;
+  line-height: 1.7;
 }
 
-.postContent {
-  line-height: 1.6;
-  margin-bottom: 24px;
+.actions {
+  margin-top: 16px;
 }
 
-/*이후 페이지별 전용 클래스*/
+.editor-form textarea {
+  resize: vertical;
+}
+
+.profile-card {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 16px;
+}
+
+.profile-card img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2px solid #d1d9e8;
+}
+
+.profile-card p {
+  margin-bottom: 8px;
+}
+
+.empty {
+  color: #5f6f88;
+  padding: 8px 0;
+}
+
+.footer {
+  text-align: center;
+  color: #4f5e78;
+  margin-top: 12px;
+  padding: 8px;
+}
+
+@media (max-width: 900px) {
+  .top-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .search-wrap {
+    flex-direction: column;
+  }
+
+  .board-switch {
+    justify-content: space-between;
+  }
+
+  .profile-card {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,7 +1,5 @@
-import {Error} from "../components/temp.jsx";
+import { ErrorPage } from "../components/temp.jsx";
 
-export default function NotFoundPage(){
-    return (
-        <Error/>
-    )
+export default function NotFoundPage() {
+  return <ErrorPage />;
 }

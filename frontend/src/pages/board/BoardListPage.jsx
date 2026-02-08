@@ -1,17 +1,81 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import BoardLayout from "../../layout/BoardLayout.jsx";
+import { useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { PostList, TopBar } from "../../components/temp.jsx";
+import { boards, posts } from "../../data/mockData.js";
 
-export default function BoardListPage(){
-    /*현재 선택된 tag랑 board도 상태로 추가, 또는 data로 분리하는것도 고려*/
-    const [currentBoard,setCurrentBoard]=useState(contentbox)
-    const navigate=useNavigate()
+function includesByType(post, keyword, searchType) {
+  if (!keyword) return true;
+  const normalized = keyword.toLowerCase();
 
-    function handleSearch(){
-        navigate("/boards/:board_id/search")
+  if (searchType === "title") return post.title.toLowerCase().includes(normalized);
+  if (searchType === "content") return post.content.toLowerCase().includes(normalized);
+  if (searchType === "author") return post.author.toLowerCase().includes(normalized);
+
+  return `${post.title} ${post.content}`.toLowerCase().includes(normalized);
+}
+
+export default function BoardListPage() {
+  const { boardId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+
+  const initialType = searchParams.get("type") || "title+content";
+  const initialKeyword = searchParams.get("keyword") || "";
+
+  const [searchType, setSearchType] = useState(initialType);
+  const [searchKeyword, setSearchKeyword] = useState(initialKeyword);
+
+  useEffect(() => {
+    setSearchType(initialType);
+    setSearchKeyword(initialKeyword);
+  }, [initialKeyword, initialType]);
+
+  const isSearchMode = location.pathname.endsWith("/search");
+
+  const visiblePosts = useMemo(() => {
+    const boardFiltered = posts.filter((post) => post.boardId === boardId);
+    if (!isSearchMode) return boardFiltered;
+
+    return boardFiltered.filter((post) => includesByType(post, initialKeyword, initialType));
+  }, [boardId, initialKeyword, initialType, isSearchMode]);
+
+  const currentBoard = boards.find((board) => board.id === boardId) || boards[0];
+
+  const handleBoardChange = (nextBoardId) => {
+    if (isSearchMode) {
+      navigate(
+        `/boards/${nextBoardId}/search?type=${encodeURIComponent(searchType)}&keyword=${encodeURIComponent(searchKeyword)}`,
+      );
+      return;
     }
+    navigate(`/boards/${nextBoardId}`);
+  };
 
-    return (
-        <BoardLayout search={handleSearch}/>
-    )
+  const handleSearch = () => {
+    navigate(
+      `/boards/${boardId}/search?type=${encodeURIComponent(searchType)}&keyword=${encodeURIComponent(searchKeyword)}`,
+    );
+  };
+
+  return (
+    <>
+      <TopBar
+        boards={boards}
+        currentBoardId={currentBoard.id}
+        onBoardChange={handleBoardChange}
+        searchType={searchType}
+        onSearchTypeChange={setSearchType}
+        searchKeyword={searchKeyword}
+        onSearchKeywordChange={setSearchKeyword}
+        onSearchSubmit={handleSearch}
+      />
+      <PostList
+        posts={visiblePosts}
+        boardName={currentBoard.name}
+        isSearch={isSearchMode}
+        searchKeyword={initialKeyword}
+      />
+    </>
+  );
 }
